@@ -16,7 +16,7 @@ class options():
         parser.add_argument("--read_path", type=str, default="我的日程.html", help="The read path.")
         parser.add_argument("--head_path", type=str, default="header.txt", help="The first few lines of the document.")
         parser.add_argument("--exclude", action="store_true", default=False, help="Whether to exclude some class or not.")
-        parser.add_argument("--exclude_class", nargs='+', default=["早自习","升旗","晚自习"])
+        parser.add_argument("--exclude_class", nargs='+', default=["早自习","升旗","晚自习","早读"])
         parser.add_argument("--repeat", action="store_false", default=False, help="Whether to repeat the calendar or not.")
         parser.add_argument("--repeat_weeks", type=int, default=20, help="repeat how many weeks.")
         parser.add_argument("--alarms", action="store_true", default=False, help="Whether to use the alarm or not.")
