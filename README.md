@@ -1,10 +1,12 @@
 # SSAP-auto-calendar
 # 需要安装 python 3.4 及以上版本 和 pip
 
-python推荐安装最新版[安装教程](https://zhuanlan.zhihu.com/p/344887837)          
-按照上面步骤一步步来，不可能安不上。             
+python推荐安装最新版            
+[安装教程](https://zhuanlan.zhihu.com/p/635089472)                            
+按照上面步骤一步步来，不可能安不上。              
+[python下载链接](https://www.python.org/downloads/)
 ~~实在不行就打劫身边一个会python的同学帮你装~~                 
-python 3.4 及以上版本都预装了 pip   
+python 3.4 及以上版本都预装了 pip            
 
 ## SSAP-autp-calendar for mac 教程：
 
