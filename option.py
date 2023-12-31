@@ -3,8 +3,9 @@ import argparse
 
 class options():    
     def init(self):
-        with open(self.opt.head_path, "r") as f:
-            str = f.read()
+        # with open(self.opt.head_path, "r") as f:
+        #     str = f.read()
+        str = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nCLASS:PUBLIC\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nTZURL:http://tzurl.org/zoneinfo-outlook/Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nEND:STANDARD\nEND:VTIMEZONE\n"
         with open(self.opt.save_path, "w") as f:
             f.write(str)
     def get_opt(self):
@@ -14,7 +15,7 @@ class options():
         parser.add_argument("--year", type=int, default=2023, help="The starting day of the week.")
         parser.add_argument("--save_path", type=str, default='export.ics', help="The path to store the calender.")
         parser.add_argument("--read_path", type=str, default="我的日程.html", help="The read path.")
-        parser.add_argument("--head_path", type=str, default="header.txt", help="The first few lines of the document.")
+        # parser.add_argument("--head_path", type=str, default="header.txt", help="The first few lines of the document.")
         parser.add_argument("--exclude", action="store_true", default=False, help="Whether to exclude some class or not.")
         parser.add_argument("--exclude_class", nargs='+', default=["早自习","升旗","晚自习","早读"])
         parser.add_argument("--repeat", action="store_false", default=False, help="Whether to repeat the calendar or not.")
