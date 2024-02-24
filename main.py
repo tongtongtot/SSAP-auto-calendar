@@ -54,8 +54,11 @@ def check(name):
 	if opt.exclude is False:
 		return False
 	#如果不删除某些课程，直接退出
-	for str in opt.exclude_class:
-		if name.count(str) > 0:
+	for s in opt.exclude_class:
+		if name.count(s) > 0:
+			return True
+	for s in opt.exclude_extra:
+		if name.count(s) > 0:
 			return True
 	#如果这个课程应该被删除，则删除
 	return False
