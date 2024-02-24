@@ -56,7 +56,7 @@ A4:
 2.可以自定义输出的文件 (使用 --save_path your_path),              
 3.可以自定义是否不显示某些课程 (使用 --exclude 默认不显示升旗和早晚自习),              
 4.可以自定义不显示课程的名称 (使用 --exclude --exclude_class class_name(课程名称/课程名称的一部分) 注：只要名字有包含添加的字符就会删去，支持添加多个课程，课程之间用空格连接),      
-  4.1.若不想重新输入所有课程，只想增加不显示的课程名称的话，请使用 --exclude --exclude_extra class_name 即可,
+&emsp; 4.1.若不想重新输入所有课程，只想增加不显示的课程名称的话，请使用 --exclude --exclude_extra class_name 即可,              
 5.可以自定义是否使用开始前提示 (使用 --alarms 默认提前5分钟, 使用 --alarm_set_time minutes 来修改提前的时间),                 
 6.可以自定义提醒的方式 (使用 --alarm_mode mode 目前支持 "display" 和 "audio" 两种模式),             
 7.可以自定义是否重复日历(按周重复，默认关闭，默认20周 使用 --repeat 打开该功能 使用 --repeat_weeks week 来修改默认值),   
