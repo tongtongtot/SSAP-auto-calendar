@@ -18,11 +18,9 @@ python 3.4 及以上版本都预装了 pip
 
 4.把“我的日程.html”移动至刚才解压出来的文件夹
 
-5.右键文件夹 点击新建文件夹位置的终端窗口
+5.双击start文件启动      
 
-6.输入启动命令 python3 main.py        
-
-7.把export.ics拖动至日历
+6.把export.ics拖动至日历
 
 ## SSAP-autp-calendar for Windows 教程：   
 
@@ -34,7 +32,7 @@ python 3.4 及以上版本都预装了 pip
 
 4.把“我的日程.html”移动至刚解压出来的文件夹
 
-5.双击start.bat启动
+5.双击start.bat启动         
 
 6.把export.ics拖动至日历
 
@@ -55,14 +53,15 @@ A3: 虚拟机的路径不太一样，建议在 C:/ 下重新装python, 否则环
 Q4: 有什么自定义功能吗？      
 A4:       
 1.可以自定义读取的文件 (使用 --read_path your_path),    
-2.可以自定义输出的文件 (使用 --save_path your_path),            
+2.可以自定义输出的文件 (使用 --save_path your_path),              
 3.可以自定义是否不显示某些课程 (使用 --exclude 默认不显示升旗和早晚自习),              
-4.可以自定义不显示课程的名称 (使用 --exclude --exclude_class class_name 注：只要名字有包含添加的字符就会删去，支持添加多个课程，课程之间用空格连接).             
-5.可以自定义是否使用开始前提示 (使用 --alarms 默认提前5分钟, 使用 --alarm_set_time minutes 来修改提前的时间)             
-6.可以自定义提醒的方式 (使用 --alarm_mode mode 目前支持 "display" 和 "audio" 两种模式)             
-7.可以自定义是否重复日历(按周重复，默认关闭，默认20周 使用 --repeat 打开该功能 使用 --repeat_weeks week 来修改默认值)   
-8.添加了手表模式，可以将地址添加到名称后面防止手表无法显示地址的问题 使用 --watch_mode 打开该功能               
-9.添加了精细地点模式，修复了某些地图APP搜索位置错误的bug 使用 --precise_location 打开该功能               
+4.可以自定义不显示课程的名称 (使用 --exclude --exclude_class class_name(课程名称/课程名称的一部分) 注：只要名字有包含添加的字符就会删去，支持添加多个课程，课程之间用空格连接),      
+  4.1.若不想重新输入所有课程，只想增加不显示的课程名称的话，请使用 --exclude --exclude_extra class_name 即可,
+5.可以自定义是否使用开始前提示 (使用 --alarms 默认提前5分钟, 使用 --alarm_set_time minutes 来修改提前的时间),                 
+6.可以自定义提醒的方式 (使用 --alarm_mode mode 目前支持 "display" 和 "audio" 两种模式),             
+7.可以自定义是否重复日历(按周重复，默认关闭，默认20周 使用 --repeat 打开该功能 使用 --repeat_weeks week 来修改默认值),   
+8.添加了手表模式，可以将地址添加到名称后面防止手表无法显示地址的问题 使用 --watch_mode 打开该功能,               
+9.添加了精细地点模式，修复了某些地图APP搜索位置错误的bug 使用 --precise_location 打开该功能,                    
 
 Q5: 如果我的课表并不整齐(比如第三节没课) 或者 有一天因为放假全天没课，这个还可以正常显示吗？                     
 A5: 可以的。但是这个方法目前仍然在公测阶段，需要各位的bug反馈来敲定最终的方法      
