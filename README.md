@@ -8,6 +8,9 @@ python推荐安装最新版
 ~~实在不行就打劫身边一个会python的同学帮你装~~                 
 python 3.4 及以上版本都预装了 pip            
 
+#效果展示
+![效果图](https://github.com/tongtongtot/SSAP-auto-calendar/assets/55981482/1bc134a6-296e-46f8-a41c-467436506d71)
+
 ## SSAP-autp-calendar for mac 教程：
 
 1.打开schoolpal的我的日程
@@ -56,7 +59,9 @@ A4:
 2.可以自定义输出的文件 (使用 --save_path your_path),              
 3.可以自定义是否不显示某些课程 (使用 --exclude 默认不显示升旗和早晚自习),              
 4.可以自定义不显示课程的名称 (使用 --exclude --exclude_class class_name(课程名称/课程名称的一部分) 注：只要名字有包含添加的字符就会删去，支持添加多个课程，课程之间用空格连接),      
-&emsp; 4.1.若不想重新输入所有课程，只想增加不显示的课程名称的话，请使用 --exclude --exclude_extra class_name 即可,              
+&emsp; 4.1.若不想重新输入所有课程，只想增加不显示的课程名称的话，请使用 --exclude --exclude_extra class_name 即可,     
+&emsp; 4.2.可以自定义不显示星期几的课程 (使用 --exclude --exclude_dateofWeek 日期(星期几) 即可)
+e.g. python3 main.py --exclude --exclude_extra FAP 辅导 --exclude_dateofWeek 3 4 5 的意思是：不显示某些课程，除了默认不显示的课程外，也不显示字段中存在"FAP"和"辅导"的课程，并且不显示星期一和星期二的课程。
 5.可以自定义是否使用开始前提示 (使用 --alarms 默认提前5分钟, 使用 --alarm_set_time minutes 来修改提前的时间),                 
 6.可以自定义提醒的方式 (使用 --alarm_mode mode 目前支持 "display" 和 "audio" 两种模式),             
 7.可以自定义是否重复日历(按周重复，默认关闭，默认20周 使用 --repeat 打开该功能 使用 --repeat_weeks week 来修改默认值),   
@@ -72,3 +77,6 @@ A6改: 你TM之前都改了什么东西啊，明明就不用这么抽象
 
 Q7: 我有 bug 想要 report, 有没有作者的联系方式？            
 A7: 可以在 github 上 report, 也可以联系作者的邮箱: tongtongtot@163.com            
+
+Q8: 为什么想要写Lite版本,删除了多少功能?
+A8: 经过调查，大部分的功能(如“重复日历”“精确地址”等功能)并未被使用，这些功能只会让项目变得臃肿。另外，原先的代码存在有不少隐患，可能会为之后新增功能带来不少麻烦，因此长痛不如短痛选择将其全部删除。但是请放心，常用的功能仍然可以自定义(如自定义输入输出路径，不显示课程和手表模式)，完成版也绝对不会收费/打广告，请放心使用。
