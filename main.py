@@ -18,42 +18,45 @@ def get_time(time, delta):
 
 def get_str(name, loc, start_time, end_time, delta):
 	#ics格式化
-	str = 'BEGIN:VEVENT\n'
+	Vevent = 'BEGIN:VEVENT\n'
 	#开始event
-	str += f"DTSTART;TZID=Asia/Shanghai:{get_time(start_time, delta)}\n"
-	str += f"DTEND;TZID=Asia/Shanghai:{get_time(end_time, delta)}\n"
+	Vevent += f"DTSTART;TZID=Asia/Shanghai:{get_time(start_time, delta)}\n"
+	Vevent += f"DTEND;TZID=Asia/Shanghai:{get_time(end_time, delta)}\n"
 	#开始时间和结束时间
 	if opt.watch_mode is True:	
-		str += f"SUMMARY:{name}{loc}\n"
+		Vevent += f"SUMMARY:{name}{loc}\n"
 	#手表上无法显示地点，因此加在名字后面
 	elif opt.precise_location is True:
-		str += f"SUMMARY:{name}\n"
-		str += f"LOCATION:广东省广州市龙溪大道省实路1号 {loc}\n"
+		Vevent += f"SUMMARY:{name}\n"
+		Vevent += f"LOCATION:广东省广州市龙溪大道省实路1号 {loc}\n"
 	#防止苹果识别错误
 	else:
-		str += f"SUMMARY:{name}\n"
-		str += f"LOCATION:{loc}\n"
+		Vevent += f"SUMMARY:{name}\n"
+		Vevent += f"LOCATION:{loc}\n"
 	#加入课程名称和地点名称
 	if opt.repeat is True:
-		str += f"RRULE:FREQ=WEEKLY;UNTIL={get_time(start_time, opt.repeat_weeks * 7)}\n"
+		Vevent += f"RRULE:FREQ=WEEKLY;UNTIL={get_time(start_time, opt.repeat_weeks * 7)}\n"
 	#每周重复课程
 	if opt.alarms is True:
-		str += f"BEGIN:VALARM\n"
-		str += f"TRIGGER:-PT{opt.alarm_set_time}M\n"
+		stVeventr += f"BEGIN:VALARM\n"
+		Vevent += f"TRIGGER:-PT{opt.alarm_set_time}M\n"
 		if opt.alarm_mode == "audio" or opt.alarm_mode == 'all':
-			str += f"ACTION:AUDIO\n"
+			Vevent += f"ACTION:AUDIO\n"
 		if opt.alarm_mode == "display" or opt.alarm_mode == 'all':
-			str += f"ACTION:DISPLAY\n"
-		str += f"END:VALARM\n"
+			Vevent += f"ACTION:DISPLAY\n"
+		Vevent += f"END:VALARM\n"
 	#添加警报
-	str += 'END:VEVENT\n'
+	Vevent += 'END:VEVENT\n'
 	#结束课程
-	return str
+	return Vevent
 
-def check(name):
+def check(name, pos):
 	if opt.exclude is False:
 		return False
 	#如果不删除某些课程，直接退出
+	if len(opt.exclude_dateofWeek) > 1:
+		if str(pos) in opt.exclude_dateofWeek:
+			return True
 	for s in opt.exclude_class:
 		if name.count(s) > 0:
 			return True
@@ -123,12 +126,12 @@ if __name__ == '__main__':
 	#此时classes已经存储了所有的信息
 	#classes格式为 ["课程名字 时间","地点"]...
 
-	str = ""
+	Vcalender = ""
 
 	for k in range(len(classes)//2):
 		i,j = 2 * k, 2 * k + 1
 		name = classes[i][:-11]
-		if(check(name)):
+		if(check(name,deltas[k * 2])):
 			continue
 		time = classes[i][-11:]
 		#i,j分别为课程名字和地点的下标
@@ -136,15 +139,15 @@ if __name__ == '__main__':
 		#时间格式为 HH:MM - HH:MM, 为课程开始到截止的时间
 		time_start, time_end = time.split('-')
 		loc = classes[j]
-		str += get_str(name, loc, time_start, time_end, deltas[k * 2])
+		Vcalender += get_str(name, loc, time_start, time_end, deltas[k * 2])
 		#将信息制成.ics文件格式
 		# name是课程名称
 		# time是时间
 		# loc是地点
 
-	str += "END:VCALENDAR\n"
+	Vcalender += "END:VCALENDAR\n"
 	#结束写入.ics文件
 
 	with open(opt.save_path, "a") as f:
-		f.write(str)
+		f.write(Vcalender)
 	#将信息写入.ics文件

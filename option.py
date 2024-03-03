@@ -5,9 +5,9 @@ class options():
     def init(self):
         # with open(self.opt.head_path, "r") as f:
         #     str = f.read()
-        str = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nCLASS:PUBLIC\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nTZURL:http://tzurl.org/zoneinfo-outlook/Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nEND:STANDARD\nEND:VTIMEZONE\n"
+        start = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nCLASS:PUBLIC\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nTZURL:http://tzurl.org/zoneinfo-outlook/Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nEND:STANDARD\nEND:VTIMEZONE\n"
         with open(self.opt.save_path, "w") as f:
-            f.write(str)
+            f.write(start)
     def get_opt(self):
         parser = argparse.ArgumentParser()
         parser.add_argument("--day", type=int, default=1, help="The starting day of the week.")
@@ -19,6 +19,7 @@ class options():
         parser.add_argument("--exclude", action="store_true", default=False, help="Whether to exclude some class or not.")
         parser.add_argument("--exclude_class", nargs='+', default=["早自习","升旗","晚自习","早读","期末考","期中考"])
         parser.add_argument("--exclude_extra",nargs='+', default=[])
+        parser.add_argument("--exclude_dateofWeek", nargs='+', default=[], help="Exclude classes that you are not going to school (For some Reason XD).")
         parser.add_argument("--repeat", action="store_false", default=False, help="Whether to repeat the calendar or not.")
         parser.add_argument("--repeat_weeks", type=int, default=20, help="repeat how many weeks.")
         parser.add_argument("--alarms", action="store_true", default=False, help="Whether to use the alarm or not.")
