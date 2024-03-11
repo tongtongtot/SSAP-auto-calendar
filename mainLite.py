@@ -95,7 +95,7 @@ if __name__ == '__main__':
 		if opt.exclude is False:
 			return False
 		#如果不删除某些课程，直接退出
-		if len(opt.exclude_dateofWeek) > 1:
+		if len(opt.exclude_dateofWeek) > 0:
 			if str(pos) in opt.exclude_dateofWeek:
 				return True
 		for s in opt.exclude_class:
