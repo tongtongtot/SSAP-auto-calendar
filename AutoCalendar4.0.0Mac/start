@@ -1,9 +1,0 @@
-basepath=$(cd `dirname $0`; pwd)
-cd ${basepath}/
-
-# currentPath=$(pwd)
-# echo "当前文件夹路径: $currentPath"
-
-
-# 需要修改的话修改这一条语句即可
-python3 mainAuto.py
