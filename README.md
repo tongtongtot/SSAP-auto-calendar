@@ -93,7 +93,7 @@ SSAP-auto-calendar 4.0是全自动处理，您只需双击start文件即可全�
 
 使用时请先打开calendar.config文件，并在填写您的账号与密码以继续使用。                    
 
-我们不会也不能获取到您的密码，您的密码仅仅会保存在本地(您的电脑)和https://sendeltastudent.schoolis.cn/网站上，所以请放心使用。
+我们不会也不能获取到您的密码，您的密码仅仅会保存在本地(您的电脑)和https://sendeltastudent.schoolis.cn/      网站上，所以请放心使用。
 
 初次打开可能比较慢，因为需要下载依赖包，时间视您使用的网络而有波动，请您稍作等待。
 
