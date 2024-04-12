@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>from_test</title>
+</head>
+<body>
+{% if name %}
+    {{ name }}
+{% else %}
+<form method="post" action="login">
+    Name：<input type="text" name="name"/>
+    PassWord:<input type="password" name="password"/>
+    <input type="submit" value="Submit"/>
+</form>
+{% endif %}
+</body>
+</html>
