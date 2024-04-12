@@ -1,7 +1,7 @@
 import time
 import os
 import re
-import argparse
+# import argparse
 from configparser import ConfigParser
 from datetime import datetime, timedelta
 
@@ -21,46 +21,57 @@ try:
     from selenium.webdriver.support import expected_conditions as EC
 except ImportError:
     os.system("pip3 install selenium")
+    os.system("pip3 install chromedriver_py")
+    # from chromedriver_py import binary_path
     from chromedriver_py import binary_path
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
 
-try:
-    import chromedriver_autoinstaller
-except ImportError:
-    os.system("pip3 install chromedriver_autoinstaller")
+# try:
+#     import chromedriver_autoinstaller
+# except ImportError:
+#     os.system("pip3 install chromedriver_autoinstaller")
 #下载所需文件
 
-class options():    
-    def get_opt(self):
-        parser = argparse.ArgumentParser()
+# class options():    
+#     def get_opt(self):
+#         parser = argparse.ArgumentParser()
 
-        parser.add_argument("--save_path", type=str, default='课表.ics', help="The path to store the calender.")
-        # parser.add_argument("--read_path", type=str, default="我的日程.html", help="The read path.")
+#         parser.add_argument("--save_path", type=str, default='../tongtongtot.github.io/content/blogs/课表.ics', help="The path to store the calender.")
+#         # parser.add_argument("--read_path", type=str, default="我的日程.html", help="The read path.")
 
-        parser.add_argument("--exclude", action="store_true", default=False, help="Whether to exclude some class or not.")
-        parser.add_argument("--exclude_class", nargs='+', default=["早自习","升旗","晚自习","早读","期末考","期中考"], help="The name of the classes that are being removed")
-        parser.add_argument("--exclude_dateofWeek", nargs='+', default=[], help="Exclude classes that you are not going to school (For some Reason XD).")
-        parser.add_argument("--exclude_extra",nargs='+', default=[], help="Easier ways to exclude classes that you are not going to take (For some Reason XD).")
+#         parser.add_argument("--exclude", action="store_true", default=False, help="Whether to exclude some class or not.")
+#         parser.add_argument("--exclude_class", nargs='+', default=["早自习","升旗","晚自习","早读","期末考","期中考"], help="The name of the classes that are being removed")
+#         parser.add_argument("--exclude_dateofWeek", nargs='+', default=[], help="Exclude classes that you are not going to school (For some Reason XD).")
+#         parser.add_argument("--exclude_extra",nargs='+', default=[], help="Easier ways to exclude classes that you are not going to take (For some Reason XD).")
 
-        parser.add_argument("--watch_mode", action="store_true", default=False, help="Show location on watches")
+#         parser.add_argument("--watch_mode", action="store_true", default=False, help="Show location on watches")
         
-        self.opt = parser.parse_args()
-        return self.opt
+#         self.opt = parser.parse_args()
+#         return self.opt
 #options类
 
 if __name__ == '__main__':
 
-    opt = options().get_opt()
+    # opt = options().get_opt()
     config = ConfigParser()
     config.read('calendar.config', 'utf-8')
 
-    option = webdriver.ChromeOptions()
-    option.add_argument("headless")
-    browser = webdriver.Chrome(options=option)
-    
+    try:
+        option = webdriver.ChromeOptions()
+        option.add_argument("--no-sandbox")
+        option.add_argument("headless")
+        browser = webdriver.Chrome(options=option)
+    except:
+        # chromedriver_autoinstaller.install()
+        # webdriver.Chrome()
+        option = webdriver.ChromeOptions()
+        option.add_argument("headless")
+        option.add_argument("--no-sandbox")
+        browser = webdriver.Chrome(options=option, executable_path=binary_path)
+
     browser.get(r'https://sendeltastudent.schoolis.cn/')
     browser.encoding = 'utf-8'
 
@@ -82,7 +93,7 @@ if __name__ == '__main__':
 
     browser.close()
 
-    with open(opt.save_path, "w", encoding='utf-8') as f:
+    with open(config["path"]['save_path'], "w", encoding='utf-8') as f:
         f.write("BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\nCLASS:PUBLIC\nBEGIN:VTIMEZONE\nTZID:Asia/Shanghai\nTZURL:http://tzurl.org/zoneinfo-outlook/Asia/Shanghai\nX-LIC-LOCATION:Asia/Shanghai\nBEGIN:STANDARD\nTZOFFSETFROM:+0800\nTZOFFSETTO:+0800\nTZNAME:CST\nEND:STANDARD\nEND:VTIMEZONE\n")
     #撰写头文件并覆盖之前内容
         
@@ -134,20 +145,27 @@ if __name__ == '__main__':
 
     #此时classes和loc数组已经存储了所有需要用到的信息
     #classes格式为["课程名字 时间"]...
+    # print(classes)
+    # print(type(config["classes"]["exclude_class"]))
+    exclude_classes = config["classes"]["exclude_class"].split(',')
+    exclude_dateofWeek = config["classes"]["exclude_dateofWeek"].split(',')
 
+    # print(config["classes"]["exclude_class"])
     def check(name, pos):
-        if opt.exclude is False:
+        if config["classes"]["exclude"] == "False":
             return False
         #如果不删除某些课程，直接退出
-        if len(opt.exclude_dateofWeek) > 0:
-            if str(pos) in opt.exclude_dateofWeek:
+        # print(config["classes"]["exclude_dateofWeek"])
+        if len(exclude_dateofWeek) > 0:
+            if str(pos) in exclude_dateofWeek:
                 return True
-        for s in opt.exclude_class:
+        # print(config["classes"]["exclude_class"])
+        for s in exclude_classes:
             if name.count(s) > 0:
                 return True
-        for s in opt.exclude_extra:
-            if name.count(s) > 0:
-                return True
+        # for s in opt.exclude_extra:
+        #     if name.count(s) > 0:
+        #         return True
         #如果这个课程应该被删除，则删除
         return False
 
@@ -163,7 +181,7 @@ if __name__ == '__main__':
         Vevent += f"DTSTART;TZID=Asia/Shanghai:{get_time(start_time, delta)}\n"
         Vevent += f"DTEND;TZID=Asia/Shanghai:{get_time(end_time, delta)}\n"
         #开始时间和结束时间
-        if opt.watch_mode is True:	
+        if config["classes"]["watch_mode"] == "True":	
             Vevent += f"SUMMARY:{name}{loc}\n"
         #手表上无法显示地点，因此加在名字后面
         else:
@@ -177,18 +195,19 @@ if __name__ == '__main__':
     for i in range(len(classes)):
         name = classes[i][:-11]
         if(check(name,deltas[i])):
+            # print(name)
             continue
         time = classes[i][-11:]
         #时间长度固定为11位，所以分别取最后11位(时间)和其他位置(课程名称)
         #时间格式为 HH:MM - HH:MM, 为课程开始到截止的时间
         time_start, time_end = time.split('-')
 
-        with open(opt.save_path, "a", encoding='utf-8') as f:
+        with open(config["path"]['save_path'], "a", encoding='utf-8') as f:
             f.write(get_str(name, loc[i], time_start, time_end, deltas[i]))
         #将信息写入.ics文件格式
         #name是课程名称; time是时间; loc是地点
 
-    with open(opt.save_path, "a", encoding='utf-8') as f:
+    with open(config["path"]['save_path'], "a", encoding='utf-8') as f:
         f.write("END:VCALENDAR\n")
 
     print("Thanks for using SSAP-autoCalender!")
