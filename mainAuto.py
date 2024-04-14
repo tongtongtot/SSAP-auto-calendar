@@ -22,36 +22,11 @@ try:
 except ImportError:
     os.system("pip3 install selenium")
     os.system("pip3 install chromedriver_py")
-    # from chromedriver_py import binary_path
     from chromedriver_py import binary_path
     from selenium import webdriver
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
-
-# try:
-#     import chromedriver_autoinstaller
-# except ImportError:
-#     os.system("pip3 install chromedriver_autoinstaller")
-#下载所需文件
-
-# class options():    
-#     def get_opt(self):
-#         parser = argparse.ArgumentParser()
-
-#         parser.add_argument("--save_path", type=str, default='../tongtongtot.github.io/content/blogs/课表.ics', help="The path to store the calender.")
-#         # parser.add_argument("--read_path", type=str, default="我的日程.html", help="The read path.")
-
-#         parser.add_argument("--exclude", action="store_true", default=False, help="Whether to exclude some class or not.")
-#         parser.add_argument("--exclude_class", nargs='+', default=["早自习","升旗","晚自习","早读","期末考","期中考"], help="The name of the classes that are being removed")
-#         parser.add_argument("--exclude_dateofWeek", nargs='+', default=[], help="Exclude classes that you are not going to school (For some Reason XD).")
-#         parser.add_argument("--exclude_extra",nargs='+', default=[], help="Easier ways to exclude classes that you are not going to take (For some Reason XD).")
-
-#         parser.add_argument("--watch_mode", action="store_true", default=False, help="Show location on watches")
-        
-#         self.opt = parser.parse_args()
-#         return self.opt
-#options类
 
 if __name__ == '__main__':
 
@@ -63,10 +38,9 @@ if __name__ == '__main__':
         option = webdriver.ChromeOptions()
         option.add_argument("--no-sandbox")
         option.add_argument("headless")
-        browser = webdriver.Chrome(options=option)
+        browser = webdriver.Chrome(options=option, executable_path=binary_path)
     except:
         # chromedriver_autoinstaller.install()
-        # webdriver.Chrome()
         option = webdriver.ChromeOptions()
         option.add_argument("headless")
         option.add_argument("--no-sandbox")
@@ -87,8 +61,8 @@ if __name__ == '__main__':
     wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,'body > div.ng-scope > div > topbar > div > div > div > span:nth-child(3)')))
     schedule_button = browser.find_element(By.CSS_SELECTOR,'body > div.ng-scope > div > topbar > div > div > div > span:nth-child(3)')
     ActionChains(browser).click(schedule_button).perform()
-    
-    wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,'body > div.ng-scope > div > ui-view > div > schedule > div > xb-my-calendar-with-print > div.ng-pristine.ng-untouched.ng-valid.ng-isolate-scope.fc.fc-unthemed.fc-ltr.ng-not-empty > div.fc-view-container > div > table > tbody > tr > td > div.fc-scroller.fc-time-grid-container > div > div.fc-content-skeleton > table > tbody > tr > td:nth-child(2) > div > div:nth-child(2) > a.fc-time-grid-event.fc-v-event.fc-event.fc-start.fc-end.fc-short > div.fc-content')))
+    time.sleep(5)
+    wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR,'body > div.ng-scope > div > ui-view > div > schedule > div > xb-my-calendar-with-print > div.ng-pristine.ng-untouched.ng-valid.ng-isolate-scope.fc.fc-unthemed.fc-ltr.ng-not-empty > div.fc-view-container > div > table > tbody > tr > td > div.fc-scroller.fc-time-grid-container > div > div.fc-content-skeleton > table > tbody > tr > td:nth-child(3) > div > div:nth-child(2)')))
     data = browser.page_source
 
     browser.close()

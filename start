@@ -6,4 +6,4 @@ cd ${basepath}/
 
 
 # 需要修改的话修改这一条语句即可
-python3 main.py
+python3 mainAuto.py
